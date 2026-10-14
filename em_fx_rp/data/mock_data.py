@@ -132,6 +132,11 @@ def generate_mock_market_data(
         "GEL": {"base_spot": 2.87,  "base_rate": 9.0,  "cpi": 7.0, "base_vol": 10.5, "rr": 1.8, "bf": 0.28, "beta": 0.45},
         "AZN": {"base_spot": 1.70,  "base_rate": 7.25, "cpi": 3.0, "base_vol": 1.5,  "rr": 0.2, "bf": 0.06, "beta": 0.08},
         "AMD": {"base_spot": 479.0, "base_rate": 5.5,  "cpi": 1.5, "base_vol": 6.0,  "rr": 0.8, "bf": 0.15, "beta": 0.25},
+        "MDL": {"base_spot": 17.5,  "base_rate": 6.0,  "cpi": 5.0, "base_vol": 8.0,  "rr": 1.2, "bf": 0.20, "beta": 0.35},
+        "ALL": {"base_spot": 95.0,  "base_rate": 3.25, "cpi": 2.5, "base_vol": 7.0,  "rr": 1.0, "bf": 0.18, "beta": 0.30},
+        "RSD": {"base_spot": 108.0, "base_rate": 6.5,  "cpi": 5.5, "base_vol": 6.5,  "rr": 0.8, "bf": 0.15, "beta": 0.25},
+        "BSM": {"base_spot": 1.80,  "base_rate": 3.5,  "cpi": 3.0, "base_vol": 5.5,  "rr": 0.5, "bf": 0.12, "beta": 0.20},
+        "BAM": {"base_spot": 1.80,  "base_rate": 3.5,  "cpi": 3.0, "base_vol": 5.5,  "rr": 0.5, "bf": 0.12, "beta": 0.20},
     }
 
     for ccy in currencies:

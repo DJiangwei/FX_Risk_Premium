@@ -22,7 +22,7 @@ class DataLoader:
 
     def __init__(
         self,
-        universe: Union[str, List[str]] = "EM_CORE",
+        universe: Union[str, List[str]] = "EDGE",
         cache_dir: str = ".cache",
         use_cache: bool = True,
         force_mock: bool = False

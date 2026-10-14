@@ -20,7 +20,7 @@ The package comes pre-configured with **57 currencies** mapped to standard Bloom
 | **3) LatAM** | `MXN`, `BRL`, `CLP`, `COP`, `PEN`, `ARS` | Latin America |
 | **4) SSA** | `NGN`, `KES`, `GHS`, `UGX`, `ZMW`, `TZS`, `AOA`, `XOF` | Sub-Saharan Africa |
 | **5) Asia** | `CNY`, `CNH`, `HKD`, `SGD`, `TWD`, `KRW`, `INR`, `IDR`, `PHP`, `THB`, `MYR`, `VND`, `PKR` | Greater China, North & South-East Asia, South Asia |
-| **6) Edge (Frontier / Caucasus)** | `KZT`, `UZS`, `TJS`, `KGS`, `MNT`, `GEL`, `AZN`, `AMD` | Central Asia, Caucasus & Mongolia |
+| **6) Edge (Frontier / Caucasus & Balkans)** | `KZT`, `UZS`, `TJS`, `KGS`, `MNT`, `GEL`, `AZN`, `AMD`, `MDL`, `ALL`, `RSD`, `BSM` | Central Asia, Caucasus, Mongolia & Balkans |
 
 ---
 
@@ -63,9 +63,9 @@ pip install -e .
 from em_fx_rp.data.bbg_loader import DataLoader
 from em_fx_rp.models.composite import CompositeRiskPremiumModel
 
-# 1. Choose any category: "DM", "CEEMEA", "LATAM", "SSA", "ASIA", "EDGE", "EM_CORE", "ALL"
+# 1. Choose any category: "DM", "CEEMEA", "LATAM", "SSA", "ASIA", "EDGE", "EM_ALL", "ALL_CURRENCIES"
 # or supply your own custom list of currency codes:
-loader = DataLoader(universe="LATAM", use_cache=True)
+loader = DataLoader(universe="EDGE", use_cache=True)
 loader.fetch_data(start_date="2020-01-01", end_date="2023-12-31")
 
 # 2. Compute Multi-Dimensional Risk Premium Scorecard

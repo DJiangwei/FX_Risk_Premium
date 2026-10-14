@@ -11,14 +11,20 @@ from ..config import CURRENCIES, DEFAULT_UNIVERSES, CurrencyMeta
 class UniverseManager:
     """Manages FX universe definitions and quotation convention adjustments."""
 
-    def __init__(self, universe: Union[str, List[str]] = "EM_CORE"):
+    def __init__(self, universe: Union[str, List[str]] = "EDGE"):
         if isinstance(universe, str):
-            if universe.upper() in DEFAULT_UNIVERSES:
-                self.codes = DEFAULT_UNIVERSES[universe.upper()]
-            elif universe.upper() in CURRENCIES:
-                self.codes = [universe.upper()]
+            u_upper = universe.upper()
+            if u_upper in ["ALL_CCY", "TOTAL", "UNIVERSE_ALL"]:
+                u_upper = "ALL_CURRENCIES"
+
+            if u_upper in DEFAULT_UNIVERSES:
+                self.codes = DEFAULT_UNIVERSES[u_upper]
+            elif u_upper in CURRENCIES:
+                self.codes = [u_upper]
             else:
-                raise ValueError(f"Unknown universe name '{universe}'. Available: {list(DEFAULT_UNIVERSES.keys())}")
+                raise ValueError(
+                    f"Unknown universe or currency name '{universe}'. Available universes: {list(DEFAULT_UNIVERSES.keys())}"
+                )
         else:
             self.codes = [c.upper() for c in universe]
 

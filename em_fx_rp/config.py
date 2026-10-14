@@ -1,12 +1,12 @@
 """
 Configuration and metadata for FX universes, tickers, and Bloomberg conventions.
-Supports 57 currencies across 6 categories:
+Supports 61 currencies across 6 categories:
 1) DM: EUR, GBP, CHF, AUD, NZD, CAD, SEK, NOK, DKK
 2) CEEMEA: CZK, PLN, HUF, RON, TRY, ILS, EGP, ZAR, SAR, AED, QAR, RUB, UAH
 3) LatAM: MXN, BRL, CLP, COP, PEN, ARS
 4) SSA: NGN, KES, GHS, UGX, ZMW, TZS, AOA, XOF
 5) Asia: CNY, CNH, HKD, SGD, TWD, KRW, INR, IDR, PHP, THB, MYR, VND, PKR
-6) Edge: KZT, UZS, TJS, KGS, MNT, GEL, AZN, AMD
+6) Edge: KZT, UZS, TJS, KGS, MNT, GEL, AZN, AMD, MDL, ALL, RSD, BSM (BAM)
 """
 
 from dataclasses import dataclass
@@ -66,7 +66,7 @@ def _build_meta(
 
 
 # -----------------------------------------------------------------------------
-# Complete 57-Currency Master Metadata Directory
+# Complete Currency Master Metadata Directory
 # -----------------------------------------------------------------------------
 CURRENCIES: Dict[str, CurrencyMeta] = {
     # 1) DM: Developed Markets (9)
@@ -128,7 +128,7 @@ CURRENCIES: Dict[str, CurrencyMeta] = {
     "VND": _build_meta("VND", "Vietnamese Dong", "Asia", is_usd_base=True, cpi_ticker="VNCPIYOY Index", policy_ticker="VNREFI Index"),
     "PKR": _build_meta("PKR", "Pakistani Rupee", "Asia", is_usd_base=True, cpi_ticker="PKCPIYOY Index", policy_ticker="PKPRATE Index"),
 
-    # 6) Edge: Frontier / Central Asia & Caucasus (8)
+    # 6) Edge: Frontier / Central Asia, Caucasus & Balkans (12)
     "KZT": _build_meta("KZT", "Kazakhstani Tenge", "Edge", is_usd_base=True, cpi_ticker="KZCPIYOY Index", policy_ticker="KZBRTONR Index"),
     "UZS": _build_meta("UZS", "Uzbekistani Som", "Edge", is_usd_base=True, cpi_ticker="UZCPIYOY Index", policy_ticker="UZCBRATE Index"),
     "TJS": _build_meta("TJS", "Tajikistani Somoni", "Edge", is_usd_base=True, cpi_ticker="TJCPIYOY Index", policy_ticker="TJCBRATE Index"),
@@ -137,10 +137,17 @@ CURRENCIES: Dict[str, CurrencyMeta] = {
     "GEL": _build_meta("GEL", "Georgian Lari", "Edge", is_usd_base=True, cpi_ticker="GECPIYOY Index", policy_ticker="GEPOLRAT Index"),
     "AZN": _build_meta("AZN", "Azerbaijani Manat", "Edge", is_usd_base=True, cpi_ticker="AZCPIYOY Index", policy_ticker="AZCBREFI Index"),
     "AMD": _build_meta("AMD", "Armenian Dram", "Edge", is_usd_base=True, cpi_ticker="AMCPIYOY Index", policy_ticker="AMCBRATE Index"),
+    "MDL": _build_meta("MDL", "Moldovan Leu", "Edge", is_usd_base=True, cpi_ticker="MDCPYOY Index", policy_ticker="MDNBRATE Index"),
+    "ALL": _build_meta("ALL", "Albanian Lek", "Edge", is_usd_base=True, cpi_ticker="ALCPIYOY Index", policy_ticker="BOABBASE Index"),
+    "RSD": _build_meta("RSD", "Serbian Dinar", "Edge", is_usd_base=True, cpi_ticker="SRCPYOY Index", policy_ticker="NBSKPR Index"),
+    "BSM": _build_meta("BSM", "Bosnia Convertible Mark", "Edge", is_usd_base=True, market_quote="USDBAM", cpi_ticker="BACPIYOY Index", policy_ticker="BACBRATE Index"),
+    "BAM": _build_meta("BAM", "Bosnia Convertible Mark", "Edge", is_usd_base=True, market_quote="USDBAM", cpi_ticker="BACPIYOY Index", policy_ticker="BACBRATE Index"),
 }
 
 # -----------------------------------------------------------------------------
 # Pre-defined Universes exactly matching User Categories
+# Note: EM_CORE has been removed as requested.
+# Universe key for all currencies is named 'ALL_CURRENCIES' to prevent clash with Albanian Lek ('ALL').
 # -----------------------------------------------------------------------------
 DEFAULT_UNIVERSES: Dict[str, List[str]] = {
     # 1) DM
@@ -158,11 +165,10 @@ DEFAULT_UNIVERSES: Dict[str, List[str]] = {
     # 5) Asia
     "ASIA": ["CNY", "CNH", "HKD", "SGD", "TWD", "KRW", "INR", "IDR", "PHP", "THB", "MYR", "VND", "PKR"],
 
-    # 6) Edge
-    "EDGE": ["KZT", "UZS", "TJS", "KGS", "MNT", "GEL", "AZN", "AMD"],
+    # 6) Edge (including MDL, ALL, RSD, BSM)
+    "EDGE": ["KZT", "UZS", "TJS", "KGS", "MNT", "GEL", "AZN", "AMD", "MDL", "ALL", "RSD", "BSM"],
 
-    # Curated EM & Broad Universes
-    "EM_CORE": ["MXN", "BRL", "CLP", "COP", "ZAR", "PLN", "HUF", "CZK", "TRY", "KRW", "INR", "IDR", "CNH", "SGD", "TWD"],
+    # Broad EM Universe (all non-DM)
     "EM_ALL": [
         # CEEMEA
         "CZK", "PLN", "HUF", "RON", "TRY", "ILS", "EGP", "ZAR", "SAR", "AED", "QAR", "RUB", "UAH",
@@ -173,9 +179,10 @@ DEFAULT_UNIVERSES: Dict[str, List[str]] = {
         # Asia
         "CNY", "CNH", "HKD", "SGD", "TWD", "KRW", "INR", "IDR", "PHP", "THB", "MYR", "VND", "PKR",
         # Edge
-        "KZT", "UZS", "TJS", "KGS", "MNT", "GEL", "AZN", "AMD"
+        "KZT", "UZS", "TJS", "KGS", "MNT", "GEL", "AZN", "AMD", "MDL", "ALL", "RSD", "BSM"
     ],
-    "ALL": list(CURRENCIES.keys())
+    # Full universe
+    "ALL_CURRENCIES": list(CURRENCIES.keys())
 }
 
 # Global Risk Benchmarks

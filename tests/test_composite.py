@@ -48,3 +48,18 @@ def test_all_six_categories(category):
     scorecard = model.compute_scorecard()
     assert len(scorecard) == len(DEFAULT_UNIVERSES[category])
     assert "FX_RPS" in scorecard.columns
+
+
+def test_edge_currencies_and_no_em_core():
+    from em_fx_rp.data.universe import UniverseManager
+    assert "EM_CORE" not in DEFAULT_UNIVERSES
+
+    edge_mgr = UniverseManager("EDGE")
+    for ccy in ["MDL", "ALL", "RSD", "BSM"]:
+        assert ccy in edge_mgr.codes
+
+    # Verify ALL resolves to Albanian Lek currency
+    all_mgr = UniverseManager("ALL")
+    assert all_mgr.codes == ["ALL"]
+    assert all_mgr.currencies["ALL"].name == "Albanian Lek"
+
