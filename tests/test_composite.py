@@ -55,7 +55,7 @@ def test_edge_currencies_and_no_em_core():
     assert "EM_CORE" not in DEFAULT_UNIVERSES
 
     edge_mgr = UniverseManager("EDGE")
-    for ccy in ["MDL", "ALL", "RSD", "BSM"]:
+    for ccy in ["MDL", "ALL", "RSD", "BAM"]:
         assert ccy in edge_mgr.codes
 
     # Verify ALL resolves to Albanian Lek currency

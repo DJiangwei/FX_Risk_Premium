@@ -6,7 +6,7 @@ Supports 61 currencies across 6 categories:
 3) LatAM: MXN, BRL, CLP, COP, PEN, ARS
 4) SSA: NGN, KES, GHS, UGX, ZMW, TZS, AOA, XOF
 5) Asia: CNY, CNH, HKD, SGD, TWD, KRW, INR, IDR, PHP, THB, MYR, VND, PKR
-6) Edge: KZT, UZS, TJS, KGS, MNT, GEL, AZN, AMD, MDL, ALL, RSD, BSM (BAM)
+6) Edge: KZT, UZS, TJS, KGS, MNT, GEL, AZN, AMD, MDL, ALL, RSD, BAM
 """
 
 from dataclasses import dataclass
@@ -140,7 +140,6 @@ CURRENCIES: Dict[str, CurrencyMeta] = {
     "MDL": _build_meta("MDL", "Moldovan Leu", "Edge", is_usd_base=True, cpi_ticker="MDCPYOY Index", policy_ticker="MDNBRATE Index"),
     "ALL": _build_meta("ALL", "Albanian Lek", "Edge", is_usd_base=True, cpi_ticker="ALCPIYOY Index", policy_ticker="BOABBASE Index"),
     "RSD": _build_meta("RSD", "Serbian Dinar", "Edge", is_usd_base=True, cpi_ticker="SRCPYOY Index", policy_ticker="NBSKPR Index"),
-    "BSM": _build_meta("BSM", "Bosnia Convertible Mark", "Edge", is_usd_base=True, market_quote="USDBAM", cpi_ticker="BACPIYOY Index", policy_ticker="BACBRATE Index"),
     "BAM": _build_meta("BAM", "Bosnia Convertible Mark", "Edge", is_usd_base=True, market_quote="USDBAM", cpi_ticker="BACPIYOY Index", policy_ticker="BACBRATE Index"),
 }
 
@@ -165,8 +164,8 @@ DEFAULT_UNIVERSES: Dict[str, List[str]] = {
     # 5) Asia
     "ASIA": ["CNY", "CNH", "HKD", "SGD", "TWD", "KRW", "INR", "IDR", "PHP", "THB", "MYR", "VND", "PKR"],
 
-    # 6) Edge (including MDL, ALL, RSD, BSM)
-    "EDGE": ["KZT", "UZS", "TJS", "KGS", "MNT", "GEL", "AZN", "AMD", "MDL", "ALL", "RSD", "BSM"],
+    # 6) Edge (including MDL, ALL, RSD, BAM)
+    "EDGE": ["KZT", "UZS", "TJS", "KGS", "MNT", "GEL", "AZN", "AMD", "MDL", "ALL", "RSD", "BAM"],
 
     # Broad EM Universe (all non-DM)
     "EM_ALL": [
@@ -179,7 +178,7 @@ DEFAULT_UNIVERSES: Dict[str, List[str]] = {
         # Asia
         "CNY", "CNH", "HKD", "SGD", "TWD", "KRW", "INR", "IDR", "PHP", "THB", "MYR", "VND", "PKR",
         # Edge
-        "KZT", "UZS", "TJS", "KGS", "MNT", "GEL", "AZN", "AMD", "MDL", "ALL", "RSD", "BSM"
+        "KZT", "UZS", "TJS", "KGS", "MNT", "GEL", "AZN", "AMD", "MDL", "ALL", "RSD", "BAM"
     ],
     # Full universe
     "ALL_CURRENCIES": list(CURRENCIES.keys())

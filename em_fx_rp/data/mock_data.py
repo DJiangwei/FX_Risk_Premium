@@ -135,7 +135,6 @@ def generate_mock_market_data(
         "MDL": {"base_spot": 17.5,  "base_rate": 6.0,  "cpi": 5.0, "base_vol": 8.0,  "rr": 1.2, "bf": 0.20, "beta": 0.35},
         "ALL": {"base_spot": 95.0,  "base_rate": 3.25, "cpi": 2.5, "base_vol": 7.0,  "rr": 1.0, "bf": 0.18, "beta": 0.30},
         "RSD": {"base_spot": 108.0, "base_rate": 6.5,  "cpi": 5.5, "base_vol": 6.5,  "rr": 0.8, "bf": 0.15, "beta": 0.25},
-        "BSM": {"base_spot": 1.80,  "base_rate": 3.5,  "cpi": 3.0, "base_vol": 5.5,  "rr": 0.5, "bf": 0.12, "beta": 0.20},
         "BAM": {"base_spot": 1.80,  "base_rate": 3.5,  "cpi": 3.0, "base_vol": 5.5,  "rr": 0.5, "bf": 0.12, "beta": 0.20},
     }
 

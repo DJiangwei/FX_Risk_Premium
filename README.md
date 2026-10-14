@@ -20,7 +20,7 @@ The package comes pre-configured with **57 currencies** mapped to standard Bloom
 | **3) LatAM** | `MXN`, `BRL`, `CLP`, `COP`, `PEN`, `ARS` | Latin America |
 | **4) SSA** | `NGN`, `KES`, `GHS`, `UGX`, `ZMW`, `TZS`, `AOA`, `XOF` | Sub-Saharan Africa |
 | **5) Asia** | `CNY`, `CNH`, `HKD`, `SGD`, `TWD`, `KRW`, `INR`, `IDR`, `PHP`, `THB`, `MYR`, `VND`, `PKR` | Greater China, North & South-East Asia, South Asia |
-| **6) Edge (Frontier / Caucasus & Balkans)** | `KZT`, `UZS`, `TJS`, `KGS`, `MNT`, `GEL`, `AZN`, `AMD`, `MDL`, `ALL`, `RSD`, `BSM` | Central Asia, Caucasus, Mongolia & Balkans |
+| **6) Edge (Frontier / Caucasus & Balkans)** | `KZT`, `UZS`, `TJS`, `KGS`, `MNT`, `GEL`, `AZN`, `AMD`, `MDL`, `ALL`, `RSD`, `BAM` | Central Asia, Caucasus, Mongolia & Balkans |
 
 ---
 
