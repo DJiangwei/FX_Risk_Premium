@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "em_fx_rp"
+version = "0.1.0"
+description = "Emerging Market FX Risk Premium calculation and trading package based on Iqbal (2022)"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy",
+    "pandas",
+    "scipy",
+    "matplotlib"
+]
+
+[project.optional-dependencies]
+bbg = [
+    "xbbg",
+    "blpapi"
+]
+dev = [
+    "pytest",
+    "pytest-cov"
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
