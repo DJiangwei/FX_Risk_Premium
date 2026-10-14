@@ -1,49 +1,50 @@
 # `em_fx_rp`: Global & Emerging Market FX Risk Premium Package
 
-[![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Tests](https://img.shields.io/badge/tests-17%20passed-brightgreen.svg)]()
+![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)
+
+![License](https://img.shields.io/badge/license-MIT-green.svg)
+
+![Tests](https://img.shields.io/badge/tests-18%20passed-brightgreen.svg)
 
 An institutional-grade quantitative package for Foreign Exchange (FX) Risk Premium analysis and trading, built directly on the theoretical foundations of:
+
 > **Adam S. Iqbal**, *Foreign Exchange: Practical Asset Pricing and Macroeconomic Theory* (Springer / Palgrave Macmillan, 2022).
+
+📖 **Comprehensive Documentation**: For a deep mathematical derivation of the asset pricing equations and front-office trading intuition, read the [Trader Manual & Mathematical Foundations (交易员全景实战与数学推导手册)](docs/TRADER_MANUAL.md).
 
 ---
 
-## 🌍 Supported Currency Universes (57 Currencies across 6 Categories)
+## 🌍 Supported Currency Universes (61 Currencies across 6 Categories)
 
-The package comes pre-configured with **57 currencies** mapped to standard Bloomberg ticker conventions (`PX_LAST`, forwards, ATM vol, 25d Risk Reversals, 25d Butterflies, policy rates, and CPI YoY):
+The package comes pre-configured with **61 currencies** mapped to standard Bloomberg ticker conventions (`PX_LAST`, forwards, ATM vol, 25d Risk Reversals, 25d Butterflies, policy rates, and CPI YoY):
 
-| Category | Currencies (ISO Codes) | Description |
-| :--- | :--- | :--- |
-| **1) DM (Developed Markets)** | `EUR`, `GBP`, `CHF`, `AUD`, `NZD`, `CAD`, `SEK`, `NOK`, `DKK` | G10 & Scandis |
-| **2) CEEMEA** | `CZK`, `PLN`, `HUF`, `RON`, `TRY`, `ILS`, `EGP`, `ZAR`, `SAR`, `AED`, `QAR`, `RUB`, `UAH` | Central/Eastern Europe, Middle East & Africa |
-| **3) LatAM** | `MXN`, `BRL`, `CLP`, `COP`, `PEN`, `ARS` | Latin America |
-| **4) SSA** | `NGN`, `KES`, `GHS`, `UGX`, `ZMW`, `TZS`, `AOA`, `XOF` | Sub-Saharan Africa |
-| **5) Asia** | `CNY`, `CNH`, `HKD`, `SGD`, `TWD`, `KRW`, `INR`, `IDR`, `PHP`, `THB`, `MYR`, `VND`, `PKR` | Greater China, North & South-East Asia, South Asia |
-| **6) Edge (Frontier / Caucasus & Balkans)** | `KZT`, `UZS`, `TJS`, `KGS`, `MNT`, `GEL`, `AZN`, `AMD`, `MDL`, `ALL`, `RSD`, `BAM` | Central Asia, Caucasus, Mongolia & Balkans |
+| Category                                    | Currencies (ISO Codes)                                                                    | Description                                        |
+| :------------------------------------------ | :---------------------------------------------------------------------------------------- | :------------------------------------------------- |
+| **1) DM (Developed Markets)**               | `EUR`, `GBP`, `CHF`, `AUD`, `NZD`, `CAD`, `SEK`, `NOK`, `DKK`                             | G10 & Scandis                                      |
+| **2) CEEMEA**                               | `CZK`, `PLN`, `HUF`, `RON`, `TRY`, `ILS`, `EGP`, `ZAR`, `SAR`, `AED`, `QAR`, `RUB`, `UAH` | Central/Eastern Europe, Middle East & Africa       |
+| **3) LatAM**                                | `MXN`, `BRL`, `CLP`, `COP`, `PEN`, `ARS`                                                  | Latin America                                      |
+| **4) SSA**                                  | `NGN`, `KES`, `GHS`, `UGX`, `ZMW`, `TZS`, `AOA`, `XOF`                                    | Sub-Saharan Africa                                 |
+| **5) Asia**                                 | `CNY`, `CNH`, `HKD`, `SGD`, `TWD`, `KRW`, `INR`, `IDR`, `PHP`, `THB`, `MYR`, `VND`, `PKR` | Greater China, North & South-East Asia, South Asia |
+| **6) Edge (Frontier / Caucasus & Balkans)** | `KZT`, `UZS`, `TJS`, `KGS`, `MNT`, `GEL`, `AZN`, `AMD`, `MDL`, `ALL`, `RSD`, `BAM`        | Central Asia, Caucasus, Mongolia & Balkans         |
 
 ---
 
 ## 🌟 Theoretical Pillars & Architecture
 
-1. **The Central Pricing Equation (CPE) & Microfoundations (Chapter 1)**
-   $$p_t = \mathbb{E}_t^P \left[ m_{t+1} X_{t+1} \right] = \frac{\mathbb{E}_t^P[X_{t+1}]}{1+r_f} + \text{Cov}_t(m_{t+1}, X_{t+1})$$
+1. **The Central Pricing Equation (CPE) & Microfoundations (Chapter 1)**  
+   $p_t = \mathbb{E}_t^P \left[ m_{t+1} X_{t+1} \right] = \frac{\mathbb{E}_t^P[X_{t+1}]}{1+r_f} + \text{Cov}_t(m_{t+1}, X_{t+1})$  
    Currencies with payoffs negatively correlated with marginal utility $m_{t+1}$ (i.e. crashing in global recessions) must offer a positive **Currency Risk Premium** to induce risk-averse investors to hold them.
-
-2. **UIP Failure & The Carry Trade as Risk Premium (Chapter 2)**
-   $$\mathbb{E}_t^P[S_T] - F_t(T) = - e^{r_d \tau} \rho_t\left( m_{t, T}, S_T \right) \sigma_t(m_{t, T}) \sigma_t(S_T)$$
+2. **UIP Failure & The Carry Trade as Risk Premium (Chapter 2)**  
+   $\mathbb{E}_t^P[S_T] - F_t(T) = - e^{r_d \tau} \rho_t\left( m_{t, T}, S_T \right) \sigma_t(m_{t, T}) \sigma_t(S_T)$  
    Carry return is not an anomaly or "free lunch"—it is direct compensation for bearing pro-cyclical crash risk.
-
-3. **Risk Premium & Real Interest Rate Equivalence (Chapter 3, Eq. 3.13 & 3.16)**
-   $$r_f^p - r_d^p = (r_f - r_d) - (\pi_f - \pi_d) = r_f^{real} - r_d^{real}$$
+3. **Risk Premium & Real Interest Rate Equivalence (Chapter 3, Eq. 3.13 & 3.16)**  
+   $r_f^p - r_d^p = (r_f - r_d) - (\pi_f - \pi_d) = r_f^{real} - r_d^{real}$  
    Nominal interest rate differential decomposes into expected inflation differential (spot depreciation trend) and **true economic risk premium** (real yield buffer).
-
-4. **Options-Implied Tail & Skewness Risk Premiums (Chapter 4, Eq. 4.9)**
-   Extracting the Volatility Risk Premium (VRP: $\text{IV} - \text{RV}$), $25\Delta\text{ Risk Reversal}$ skew (crash risk), and Breeden-Litzenberger risk-neutral distributions:
-   $$Q(S_T = K) = e^{r_d \tau} \frac{\partial^2 C(K)}{\partial K^2}$$
-
-5. **Multi-Factor Composite Scorecard (FX-RPS)**
-   $$\text{FX-RPS}_i = w_1 z(\text{Real Carry}_i) + w_2 z(\text{Carry-to-Vol}_i) + w_3 z(\text{VRP}_i) - w_4 z(\text{Skew Ratio}_i) - w_5 z(\beta_{i, M})$$
+4. **Options-Implied Tail & Skewness Risk Premiums (Chapter 4, Eq. 4.9)**  
+   Extracting the Volatility Risk Premium (VRP: $\text{IV} - \text{RV}$), $25\Delta\text{ Risk Reversal}$ skew (crash risk), and Breeden-Litzenberger risk-neutral distributions:  
+   $Q(S_T = K) = e^{r_d \tau} \frac{\partial^2 C(K)}{\partial K^2}$
+5. **Multi-Factor Composite Scorecard (FX-RPS)**  
+   $\text{FX-RPS}_i = w_1 z(\text{Real Carry}_i) + w_2 z(\text{Carry-to-Vol}_i) + w_3 z(\text{VRP}_i) - w_4 z(\text{Skew Ratio}_i) - w_5 z(\beta_{i, M})$
 
 ---
 
@@ -112,23 +113,25 @@ print(stats)
 
 ## 📊 Bloomberg Ticker Conventions Reference
 
-| Data Category | Bloomberg Ticker Pattern | Field | Example |
-| :--- | :--- | :--- | :--- |
-| **Spot Rate** | `USD{CCY} Curncy` (or `{CCY}USD Curncy` for DM base) | `PX_LAST` | `USDMXN Curncy`, `EURUSD Curncy` |
-| **Forwards** | `USD{CCY}1M Curncy`, `USD{CCY}3M Curncy` | `PX_LAST` | `USDZAR1M Curncy`, `USDKRW3M Curncy` |
-| **ATM Implied Vol** | `USD{CCY}V1M Curncy`, `USD{CCY}V3M Curncy` | `PX_LAST` | `USDBRLV1M Curncy` |
-| **25d Risk Reversal** | `USD{CCY}25R1M Curncy` | `PX_LAST` | `USDTRY25R1M Curncy` |
-| **25d Butterfly** | `USD{CCY}25B1M Curncy` | `PX_LAST` | `USDMXN25B1M Curncy` |
-| **Policy Rates** | e.g. `MXONBR Index`, `BZSTSETA Index` | `PX_LAST` | `SARRP Index`, `CZRP2W Index` |
-| **CPI YoY** | e.g. `MXPCYOY Index`, `BZIPTL Index` | `PX_LAST` | `CPI YOY Index`, `KOCPIYOY Index` |
-| **Global Factors** | `SPX Index`, `VIX Index`, `FEDL01 Index` | `PX_LAST` | Benchmark proxies |
+| Data Category         | Bloomberg Ticker Pattern                             | Field     | Example                              |
+| :-------------------- | :--------------------------------------------------- | :-------- | :----------------------------------- |
+| **Spot Rate**         | `USD{CCY} Curncy` (or `{CCY}USD Curncy` for DM base) | `PX_LAST` | `USDMXN Curncy`, `EURUSD Curncy`     |
+| **Forwards**          | `USD{CCY}1M Curncy`, `USD{CCY}3M Curncy`             | `PX_LAST` | `USDZAR1M Curncy`, `USDKRW3M Curncy` |
+| **ATM Implied Vol**   | `USD{CCY}V1M Curncy`, `USD{CCY}V3M Curncy`           | `PX_LAST` | `USDBRLV1M Curncy`                   |
+| **25d Risk Reversal** | `USD{CCY}25R1M Curncy`                               | `PX_LAST` | `USDTRY25R1M Curncy`                 |
+| **25d Butterfly**     | `USD{CCY}25B1M Curncy`                               | `PX_LAST` | `USDMXN25B1M Curncy`                 |
+| **Policy Rates**      | e.g. `MXONBR Index`, `BZSTSETA Index`                | `PX_LAST` | `SARRP Index`, `CZRP2W Index`        |
+| **CPI YoY**           | e.g. `MXPCYOY Index`, `BZIPTL Index`                 | `PX_LAST` | `CPI YOY Index`, `KOCPIYOY Index`    |
+| **Global Factors**    | `SPX Index`, `VIX Index`, `FEDL01 Index`             | `PX_LAST` | Benchmark proxies                    |
 
 ---
 
 ## 🔬 Testing
 
 Run the full automated test suite:
+
 ```bash
 pytest -v
 ```
-All 17 tests verify exact mathematical alignment with equations in Iqbal (2022) across all 6 regional categories.
+
+All 18 tests verify exact mathematical alignment with equations in Iqbal (2022) across all 6 regional categories.
